@@ -1,13 +1,15 @@
 class_name Vehicle
 extends KinematicBody
 
+var acceleration_boost := 0
+var _boost_decay := 2
 var _wheel_base := 1.9
 var _velocity: Vector3
 var _acceleration :=  35
 var _reverse_accel := 15
 var _heading_direction: Vector3
 var _steering_direction: float
-var _steering_angle := 13
+var _steering_angle := 15
 var _gravity := 15
 var _friction := .9
 var _drag := 0.06
@@ -27,8 +29,9 @@ func _physics_process(delta: float) -> void:
 		align_to_floor()
 		var f := _friction
 		
+		_update_acceleration(delta)
 		if Input.is_action_pressed("accelerate"):
-			_velocity += _acceleration * _heading_direction * delta;
+			_velocity += get_final_acceleration() * _heading_direction * delta;
 		elif Input.is_action_pressed("reverse"):
 			_velocity -= _reverse_accel * _heading_direction * delta;
 		if Input.is_action_pressed("brake"):
@@ -50,11 +53,24 @@ func _physics_process(delta: float) -> void:
 	
 	_velocity.y -= _gravity * delta
 	_velocity = move_and_slide(_velocity, Vector3.UP)
+	for i in get_slide_count():
+		var col := get_slide_collision(i)
+		var angle := rad2deg(col.normal.angle_to(Vector3.UP))
+		if angle >= 45:
+			_velocity += col.normal * 10
+			print(_velocity)
+			break
 	$speed.text = str(_velocity.length())
 	if _velocity.length() < .01:
 		_velocity = Vector3.ZERO
 
 
+func get_final_acceleration():
+	return acceleration_boost + _acceleration
+
+func _update_acceleration(delta):
+	acceleration_boost = max(0, acceleration_boost - _boost_decay * delta)
+	
 func steering(delta):
 	var rear_wheel = global_transform.origin - _heading_direction * _wheel_base/2
 	var front_wheel = global_transform.origin + _heading_direction * _wheel_base/2
@@ -64,7 +80,7 @@ func steering(delta):
 	var d := _heading_direction.dot(_velocity.normalized())
 	if d > 0:
 		var target_vel := _heading_direction * _velocity.length()
-		_velocity = _velocity.linear_interpolate(target_vel, 21 * delta)
+		_velocity = _velocity.linear_interpolate(target_vel, 5 * delta)
 	else:
 		_velocity =  -_heading_direction * _velocity.length()
 

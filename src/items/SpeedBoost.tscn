@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/items/SpeedBoost.gd" type="Script" id=1]
+
+[sub_resource type="SphereShape" id=1]
+radius = 0.579363
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.345098, 0.847059, 1, 1 )
+
+[sub_resource type="CubeMesh" id=3]
+material = SubResource( 2 )
+size = Vector3( 0.5, 0.5, 0.5 )
+
+[node name="SpeedBoost" type="Area"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.460577, 0 )
+shape = SubResource( 1 )
+
+[node name="visual" type="Spatial" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="visual"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.461718, 0 )
+mesh = SubResource( 3 )
+material/0 = null
+[connection signal="body_entered" from="." to="." method="_on_SpeedBoost_body_entered"]
