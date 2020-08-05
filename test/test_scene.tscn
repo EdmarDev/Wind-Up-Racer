@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/vehicle/vehicle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://test/test_camera.gd" type="Script" id=2]
@@ -61,6 +61,12 @@ size = Vector3( 20, 20, 50 )
 
 [sub_resource type="BoxShape" id=11]
 extents = Vector3( 10, 10, 25 )
+
+[sub_resource type="Curve3D" id=12]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 84.8635, 0.693048, 49.6812, -27.6684, 0, 10.2324, 27.6684, 0, -10.2324, 161.062, 0, 69.3244, -24.4189, 0, -2.61406, 24.4189, 0, 2.61406, 205.376, 13.8184, 30.0766, 5.39812, 0, 25.7913, -5.39812, 0, -25.7913, 225.955, 13.3685, -32.6654, -1.86098, 0, 34.2168, 1.86098, 0, -34.2168, 199.818, 5.8568, -79.8576, 4.20419, 0, 36.3452, -4.20419, 0, -36.3452, 235.718, 0, -136.166, 2.31267, 1.52588e-05, 26.4252, -2.31267, -1.52588e-05, -26.4252, 171.837, 7.0476, -187.593, 15.1889, 0, 26.0102, -15.1889, 0, -26.0102, 164.643, -2.76368, -261.99, 36.3349, 0, 3.16907, -36.3349, 0, -3.16907, 73.8039, 6.97782, -296.621, 10.3702, 0, -28.5037, -10.3702, 0, 28.5037, -26.8415, 4.02224, -233.58, 15.3089, 0, -18.5687, -15.3089, 0, 18.5687, -20.9025, 0, -147.705, 14.8504, 0, 0.834656, -14.8504, 0, -0.834656, -79.1047, -7.56029, -114.635, 15.9161, 0, 31.2725, -15.9161, 0, -31.2725, -148.417, -6.80559, -140.392, 32.3671, 0, 3.10527, -32.3671, 0, -3.10527, -194.805, -9.38236, -189.741, 18.9041, 0, -15.8893, -18.9041, 0, 15.8893, -260.242, 0, -140.631, -1.90186, 0, -14.6407, 1.90186, 0, 14.6407, -297.971, 0, -62.8156, -2.91504, 0, -22.2977, 2.91504, 0, 22.2977, -257.884, 0, 26.7895, -18.8663, 0, -9.624, 18.8663, 0, 9.624, -236.662, 0, 73.9501, 0, 0, 0, 0, 0, 0, -181.249, 0, 85.7402, -11.3767, 0, -9.88535, 11.3767, 0, 9.88535, -127.014, 0, 98.7094, 41.2715, 0, -20.8274, -41.2715, 0, 20.8274, -134.036, 0, 153.742, 49.8784, 0, -7.66748, -49.8784, 0, 7.66748, -270.459, 0, 135.877, -19.0034, 0, -52.3391, 19.0034, 0, 52.3391, -316.961, 1.52588e-05, 227.498, 0, 0, 0, 0, 0, 0, -170.773, 1.52588e-05, 307.156, 0, 0, 0, 0, 0, 0, 0.148949, 1.52588e-05, 313.315, 0, 0, 0, 0, 0, 0, 46.3819, 6.95474, 217.345, 0, 0, 0, 0, 0, 0, 29.4659, 0.392942, 90.038 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
 
 [node name="test_scene" type="Spatial"]
 
@@ -159,7 +165,7 @@ material/0 = null
 shape = SubResource( 7 )
 
 [node name="StaticBody2" type="StaticBody" parent="track"]
-transform = Transform( 0.897474, -0.13211, -0.420817, 0, 0.954089, -0.299524, 0.441067, 0.268815, 0.85627, 47.167, 4.31791, 0 )
+transform = Transform( 0.897474, -0.13211, -0.420817, 0, 0.954089, -0.299524, 0.441067, 0.268815, 0.85627, 47.167, 1.66249, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="track/StaticBody2"]
 transform = Transform( 1, 0, 0, 7.45058e-09, 1, -1.49012e-08, 0, 1.49012e-08, 1, 0, 0, 0 )
@@ -170,7 +176,7 @@ material/0 = null
 shape = SubResource( 9 )
 
 [node name="StaticBody3" type="StaticBody" parent="track"]
-transform = Transform( 0.858163, 0.153768, 0.489807, 0, 0.954089, -0.299524, -0.513377, 0.25704, 0.818764, 41.3593, 19.3121, -58.981 )
+transform = Transform( 0.858163, 0.153768, 0.489807, 0, 0.954089, -0.299524, -0.513377, 0.25704, 0.818764, 41.3593, 16.6567, -58.981 )
 
 [node name="MeshInstance" type="MeshInstance" parent="track/StaticBody3"]
 transform = Transform( 1, 0, 0, 1.49012e-08, 1, 0, 2.98023e-08, 2.98023e-08, 1, 0, 0, 0 )
@@ -181,7 +187,7 @@ material/0 = null
 shape = SubResource( 9 )
 
 [node name="StaticBody4" type="StaticBody" parent="track"]
-transform = Transform( 0.908012, -0.418945, 6.82548e-08, 0, -1.62921e-07, -1, 0.418945, 0.908012, -1.47934e-07, 57.8234, -9.37077, -30.9196 )
+transform = Transform( 0.908012, -0.418945, 6.82548e-08, 0, -1.62921e-07, -1, 0.418945, 0.908012, -1.47934e-07, 57.8234, -12.0262, -30.9196 )
 
 [node name="MeshInstance" type="MeshInstance" parent="track/StaticBody4"]
 transform = Transform( 1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, 0 )
@@ -193,7 +199,7 @@ transform = Transform( 1, 0, 0, 0, 1, 4.26326e-14, 0, -4.26326e-14, 1, 0, 0, 0 )
 shape = SubResource( 11 )
 
 [node name="StaticBody5" type="StaticBody" parent="track"]
-transform = Transform( 0.0455374, 0.299213, 0.953099, 0, 0.954089, -0.299524, -0.998963, 0.0136395, 0.0434467, -7.88424, 34.286, -88.6071 )
+transform = Transform( 0.0455374, 0.299213, 0.953099, 0, 0.954089, -0.299524, -0.998963, 0.0136395, 0.0434467, -7.88424, 31.6306, -88.6071 )
 
 [node name="MeshInstance" type="MeshInstance" parent="track/StaticBody5"]
 transform = Transform( 1, 0, 3.72529e-09, 1.39698e-08, 1, 2.32831e-09, 2.98023e-08, 2.03727e-09, 1, 0, 0, 0 )
@@ -204,7 +210,7 @@ material/0 = null
 shape = SubResource( 9 )
 
 [node name="StaticBody6" type="StaticBody" parent="track"]
-transform = Transform( 0.850508, 0.525962, -8.569e-08, 0, -1.62921e-07, -1, -0.525962, 0.850508, -1.38565e-07, 24.6029, 5.60315, -86.8487 )
+transform = Transform( 0.850508, 0.525962, -8.569e-08, 0, -1.62921e-07, -1, -0.525962, 0.850508, -1.38565e-07, 24.6029, 2.94773, -86.8487 )
 
 [node name="MeshInstance" type="MeshInstance" parent="track/StaticBody6"]
 transform = Transform( 1, -2.98023e-08, 0, 2.98023e-08, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, 0 )
@@ -216,7 +222,7 @@ transform = Transform( 1, 0, 0, 0, 1, 4.26326e-14, 0, -4.26326e-14, 1, 0, 0, 0 )
 shape = SubResource( 11 )
 
 [node name="StaticBody7" type="StaticBody" parent="track"]
-transform = Transform( -0.812175, 0.174746, 0.556628, 0, 0.954089, -0.299524, -0.583414, -0.243266, -0.774887, -59.531, 49.2432, -63.5319 )
+transform = Transform( -0.812175, 0.174746, 0.556628, 0, 0.954089, -0.299524, -0.583414, -0.243266, -0.774887, -59.531, 46.5878, -63.5319 )
 
 [node name="MeshInstance" type="MeshInstance" parent="track/StaticBody7"]
 transform = Transform( 1, 0, 3.72529e-09, 1.39698e-08, 1, 2.32831e-09, 2.98023e-08, 2.03727e-09, 1, 0, 0, 0 )
@@ -227,7 +233,7 @@ material/0 = null
 shape = SubResource( 9 )
 
 [node name="StaticBody8" type="StaticBody" parent="track"]
-transform = Transform( 0.0235248, 0.999723, -1.62876e-07, 0, -1.62921e-07, -1, -0.999723, 0.0235248, -3.83268e-09, -40.3253, 20.5604, -89.7931 )
+transform = Transform( 0.0235248, 0.999723, -1.62876e-07, 0, -1.62921e-07, -1, -0.999723, 0.0235248, -3.83268e-09, -40.3253, 17.905, -89.7931 )
 
 [node name="MeshInstance" type="MeshInstance" parent="track/StaticBody8"]
 transform = Transform( 1, -2.98023e-08, 0, 2.98023e-08, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, 0 )
@@ -239,7 +245,7 @@ transform = Transform( 1, 0, 0, 0, 1, 4.26326e-14, 0, -4.26326e-14, 1, 0, 0, 0 )
 shape = SubResource( 11 )
 
 [node name="StaticBody9" type="StaticBody" parent="track"]
-transform = Transform( -0.588547, -0.29286, -0.753555, 0, 0.932084, -0.362243, 0.808463, -0.213197, -0.548575, -50.5409, 65.6668, -17.271 )
+transform = Transform( -0.588547, -0.29286, -0.753555, 0, 0.932084, -0.362243, 0.808463, -0.213197, -0.548575, -50.5409, 63.0114, -17.271 )
 
 [node name="MeshInstance" type="MeshInstance" parent="track/StaticBody9"]
 transform = Transform( 1, 0, 3.72529e-09, 1.39698e-08, 1, 2.32831e-09, 2.98023e-08, 2.03727e-09, 1, 0, 0, 0 )
@@ -250,7 +256,7 @@ material/0 = null
 shape = SubResource( 9 )
 
 [node name="StaticBody10" type="StaticBody" parent="track"]
-transform = Transform( -0.803047, 0.595917, -9.70871e-08, 0, -1.62921e-07, -1, -0.595917, -0.803046, 1.30833e-07, -78.2265, 35.5763, -36.8501 )
+transform = Transform( -0.803047, 0.595917, -9.70871e-08, 0, -1.62921e-07, -1, -0.595917, -0.803046, 1.30833e-07, -78.2265, 32.9209, -36.8501 )
 
 [node name="MeshInstance" type="MeshInstance" parent="track/StaticBody10"]
 transform = Transform( 1, -2.98023e-08, 0, 2.98023e-08, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, 0 )
@@ -287,3 +293,33 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3785, 0.970133, 9.66 )
 
 [node name="SpeedBoost3" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -31.6176, 0.970133, 24.0497 )
+
+[node name="SpeedBoost4" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 136.542, 0.594671, 78.7389 )
+
+[node name="SpeedBoost5" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 129.375, 0.594671, 77.3044 )
+
+[node name="SpeedBoost6" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 122.578, 0.594671, 73.3146 )
+
+[node name="SpeedBoost7" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 209.546, 14.2759, 37.3233 )
+
+[node name="road" type="Spatial" parent="."]
+
+[node name="Path" type="Path" parent="road"]
+curve = SubResource( 12 )
+
+[node name="CSGPolygon" type="CSGPolygon" parent="road"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.326, 1.67375, -6.067 )
+use_collision = true
+invert_faces = true
+polygon = PoolVector2Array( 0, 0, 0, 0.3, 10, 0.3, 10, 0 )
+mode = 2
+path_node = NodePath("../Path")
+path_interval = 1.0
+path_rotation = 2
+path_local = false
+path_continuous_u = false
+path_joined = false

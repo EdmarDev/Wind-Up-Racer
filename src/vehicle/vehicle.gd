@@ -1,19 +1,19 @@
 class_name Vehicle
 extends KinematicBody
 
-var acceleration_boost := 0
-var persistent_boost := 0
+var acceleration_boost := 0.0
+var persistent_boost := 0.0
 var drifting := .1
-var _persistent_boost_min_speed := 15
-var _boost_decay := 2
+var persistent_boost_min_speed := 15.0
+var _boost_decay := 45.0
 var _wheel_base := 1.9
 var _velocity: Vector3
-var _acceleration :=  35
-var _reverse_accel := 15
+var _acceleration :=  35.0
+var _reverse_accel := 15.0
 var _heading_direction: Vector3
 var _steering_direction: float
-var _steering_angle := 15
-var _gravity := 15
+var _steering_angle := 15.0
+var _gravity := 15.0
 var _friction := .9
 var _drag := 0.06
 
@@ -49,7 +49,7 @@ func _physics_process(delta: float) -> void:
 		$friction.text = str(((_velocity * f).length())/delta)
 		_velocity -= _velocity * f
 	
-	$drag.text = str(((_velocity * _velocity.length() * _drag * delta).length())/delta)
+	$drag.text = str(get_final_acceleration()) #str(((_velocity * _velocity.length() * _drag * delta).length())/delta)
 	_velocity -= _velocity * _velocity.length() * _drag * delta
 	
 	look_at(global_transform.origin + _heading_direction, Vector3.UP)
@@ -74,12 +74,13 @@ func get_final_acceleration():
 
 func _update_acceleration(delta):
 	acceleration_boost = max(0, acceleration_boost - _boost_decay * delta)
-	if _velocity.length() <= _persistent_boost_min_speed:
+	if _velocity.length() <= persistent_boost_min_speed:
 		_reset_persistent_boost()
 
 
 func _reset_persistent_boost():
 	persistent_boost = 0
+	persistent_boost_min_speed = 15
 	drifting = .1
 
 
