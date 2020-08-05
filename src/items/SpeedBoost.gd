@@ -9,3 +9,5 @@ func _on_SpeedBoost_body_entered(body: Node) -> void:
 		return
 	var vehicle := body as Vehicle
 	vehicle.acceleration_boost += 60
+	vehicle.persistent_boost += 10
+	vehicle.drifting += .05

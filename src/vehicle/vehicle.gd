@@ -2,6 +2,9 @@ class_name Vehicle
 extends KinematicBody
 
 var acceleration_boost := 0
+var persistent_boost := 0
+var drifting := .1
+var _persistent_boost_min_speed := 15
 var _boost_decay := 2
 var _wheel_base := 1.9
 var _velocity: Vector3
@@ -58,7 +61,7 @@ func _physics_process(delta: float) -> void:
 		var angle := rad2deg(col.normal.angle_to(Vector3.UP))
 		if angle >= 45:
 			_velocity += col.normal * 10
-			print(_velocity)
+			_reset_persistent_boost()
 			break
 	$speed.text = str(_velocity.length())
 	if _velocity.length() < .01:
@@ -66,11 +69,20 @@ func _physics_process(delta: float) -> void:
 
 
 func get_final_acceleration():
-	return acceleration_boost + _acceleration
+	return persistent_boost + acceleration_boost + _acceleration
+
 
 func _update_acceleration(delta):
 	acceleration_boost = max(0, acceleration_boost - _boost_decay * delta)
-	
+	if _velocity.length() <= _persistent_boost_min_speed:
+		_reset_persistent_boost()
+
+
+func _reset_persistent_boost():
+	persistent_boost = 0
+	drifting = .1
+
+
 func steering(delta):
 	var rear_wheel = global_transform.origin - _heading_direction * _wheel_base/2
 	var front_wheel = global_transform.origin + _heading_direction * _wheel_base/2
@@ -80,7 +92,7 @@ func steering(delta):
 	var d := _heading_direction.dot(_velocity.normalized())
 	if d > 0:
 		var target_vel := _heading_direction * _velocity.length()
-		_velocity = _velocity.linear_interpolate(target_vel, 5 * delta)
+		_velocity = _velocity.linear_interpolate(target_vel, (1/drifting) * delta)
 	else:
 		_velocity =  -_heading_direction * _velocity.length()
 
