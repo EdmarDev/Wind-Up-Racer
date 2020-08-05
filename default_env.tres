@@ -1,0 +1,9 @@
+[gd_resource type="Environment" load_steps=2 format=2]
+
+[sub_resource type="ProceduralSky" id=1]
+
+[resource]
+background_mode = 1
+background_sky = SubResource( 1 )
+background_color = Color( 0.388235, 0.388235, 0.388235, 1 )
+ambient_light_color = Color( 0.164706, 0.164706, 0.137255, 1 )
