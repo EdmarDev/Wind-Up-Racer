@@ -6,8 +6,6 @@ var _warp_pos: Vector3
 
 func _ready() -> void:
 	target = get_node("../vehicle")
-	target.connect("warp_set", self, "_on_target_warp_set")
-	target.connect("warped", self, "_on_target_warped")
 	
 
 
@@ -21,11 +19,3 @@ func _physics_process(delta: float) -> void:
 		var future_pos := target_pos - (target_pos - self_pos).normalized() * max_distance
 		future_pos.y = target.global_transform.origin.y + 3.5
 		global_transform.origin = future_pos
-		
-
-func _on_target_warp_set():
-	_warp_pos = translation
-
-
-func _on_target_warped():
-	translation = _warp_pos

@@ -351,3 +351,5 @@ path_local = false
 path_continuous_u = false
 path_joined = false
 material = SubResource( 14 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]

@@ -1,18 +1,10 @@
 class_name Vehicle
 extends KinematicBody
 
-signal warp_set
-signal warped
-
-var acceleration_boost := 0.0
-var persistent_boost := 0.0
-var drifting := .1
-var persistent_boost_min_speed := 15.0
-var _boost_decay := 45.0
+var drifting := .25
 var _wheel_base := 1.9
 var _velocity: Vector3
 var _acceleration :=  35.0
-var _reverse_accel := 15.0
 var _heading_direction: Vector3
 var _steering_direction: float
 var _steering_angle := 9
@@ -24,21 +16,24 @@ var _is_on_floor := false
 var _floor_normal := Vector3.UP
 var _look_dir := Vector3.ZERO
 
-var _warp_position: Vector3
-var _warp_active := false
-var _warp_heading: Vector3
+var _current_energy := 0.0
+var _max_energy := 10.0
+var _brake_energy_cost := 2.0
+var _moving := false
+
+var _acceleration_boost := 0.0
+var _boost_duration := 0.0
+
 
 func _ready() -> void:
 	_heading_direction = -global_transform.basis.z
 	_look_dir = _heading_direction
+	_start_moving()
 
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("warp"):
-		if _warp_active:
-			_warp()
-		else:
-			_setup_warp()
+	_update_energy(delta)
+	_update_boost(delta)
 
 
 func _physics_process(delta: float) -> void:
@@ -50,24 +45,22 @@ func _physics_process(delta: float) -> void:
 	
 	if _is_on_floor:
 		var f := _friction
-		_update_acceleration(delta)
-		if Input.is_action_pressed("accelerate"):
+		if _moving:
 			_velocity += get_final_acceleration() * _heading_direction * delta;
-		elif Input.is_action_pressed("reverse"):
-			_velocity -= _reverse_accel * _heading_direction * delta;
-		if Input.is_action_pressed("brake"):
-			f += 3.0
-			_steering_direction *= 2.5
+			if Input.is_action_pressed("brake"):
+				f += 2.0
+				_steering_direction *= 3.5
+				_current_energy -= delta * _brake_energy_cost
 		
 		steering(delta)
 	
 		f *= delta
 		if _velocity.length() < 2:
 			f *= 3
-		$friction.text = str(((_velocity * f).length())/delta)
+		$friction.text = str((_velocity * f).length() * 1/delta)
 		_velocity -= _velocity * f
 	
-		$drag.text = str(_is_on_floor)#str(((_velocity * _velocity.length() * _drag * delta).length())/delta)
+		$drag.text = str(_current_energy)#str(((_velocity * _velocity.length() * _drag * delta).length())/delta)
 		_velocity -= _velocity * _velocity.length() * _drag * delta
 	
 	_look_dir = _look_dir.move_toward(_heading_direction, 2.0 * delta)
@@ -78,19 +71,7 @@ func _physics_process(delta: float) -> void:
 
 
 func get_final_acceleration() -> float:
-	return persistent_boost + acceleration_boost + _acceleration
-
-
-func _update_acceleration(delta: float):
-	acceleration_boost = max(0, acceleration_boost - _boost_decay * delta)
-	if _velocity.length() <= persistent_boost_min_speed:
-		_reset_persistent_boost()
-
-
-func _reset_persistent_boost():
-	persistent_boost = 0
-	persistent_boost_min_speed = 15
-	drifting = .1
+	return _acceleration + _acceleration_boost
 
 
 func steering(delta: float):
@@ -123,7 +104,6 @@ func apply_movement(delta: float):
 #			_velocity += col.normal * 10
 #			_reset_persistent_boost()
 #			break
-	$speed.text = str(_velocity.length())
 
 	_is_on_floor = false
 	var delta_vel := _velocity * delta
@@ -146,21 +126,43 @@ func apply_movement(delta: float):
 			if _velocity.length() > 10:
 				_velocity = _velocity.normalized() * 10
 			delta_vel = remainder.bounce(n)
+			reset_boost()
 		col = move_and_collide(delta_vel)
+	
+	$speed.text = str(_velocity.length())
+	if !_moving and _velocity.length() <= .5:
+		_velocity = Vector3.ZERO
 
 
-func _warp():
-	translation = _warp_position
-	_warp_active = false
-	_heading_direction = _warp_heading
-	_velocity = _heading_direction.normalized() * _velocity.length()
-	look_at(global_transform.origin + _heading_direction, Vector3.UP)
-	_look_dir = _heading_direction
-	emit_signal("warped")
+func _start_moving():
+	_moving = true
+	_current_energy = _max_energy
 
 
-func _setup_warp():
-	_warp_position = translation
-	_warp_active = true
-	_warp_heading = _heading_direction
-	emit_signal("warp_set")
+func _update_energy(delta: float):
+	_current_energy = max(0, _current_energy - delta)
+	if _current_energy == 0.0:
+		_moving = false
+		if _velocity.length() < 0.1:
+			print("GameOver")
+
+
+func recover_energy(amount: float):
+	_current_energy = min(_current_energy + amount, _max_energy)
+	_moving = true
+
+
+func _update_boost(delta: float):
+	_boost_duration = max(0.0, _boost_duration - delta)
+	if _boost_duration == 0.0:
+		_acceleration_boost = 0.0
+
+
+func add_boost(amount: float, duration: float):
+	_boost_duration += duration
+	if _acceleration_boost < amount:
+		_acceleration_boost = amount
+
+
+func reset_boost():
+	_boost_duration = 0.0
