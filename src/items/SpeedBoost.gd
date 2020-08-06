@@ -9,5 +9,5 @@ func _on_SpeedBoost_body_entered(body: Node) -> void:
 		return
 	var vehicle := body as Vehicle
 	vehicle.recover_energy(1.5)
-	vehicle.add_boost(10, .5)
+	vehicle.add_boost(15, .5)
 	queue_free()

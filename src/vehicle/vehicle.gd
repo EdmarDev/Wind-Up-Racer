@@ -21,8 +21,8 @@ var _floor_normal := Vector3.UP
 var _look_dir := Vector3.ZERO
 
 var _current_energy := 0.0
-var _max_energy := 10.0
-var _brake_energy_cost := 2.0
+var _max_energy := 120.0
+var _brake_energy_cost := 2.5
 var _jump_energy_cost := .25
 var _moving := false
 
@@ -33,6 +33,7 @@ var _boost_duration := 0.0
 func _ready() -> void:
 	_heading_direction = -global_transform.basis.z
 	_look_dir = _heading_direction
+	yield(get_tree().create_timer(1.0), "timeout")
 	_start_moving()
 
 
@@ -75,7 +76,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		_air_steering(delta)
 	
-	_look_dir = _look_dir.move_toward(_heading_direction, 1.35 * delta)
+	_look_dir = _look_dir.move_toward(_heading_direction, 101.35 * delta)
 	look_at(global_transform.origin + _look_dir, Vector3.UP)
 	
 	if not _is_on_floor and _velocity.y < 0:
@@ -106,7 +107,7 @@ func steering(delta: float):
 
 func _air_steering(delta: float):
 	_heading_direction = _heading_direction.rotated(Vector3.UP,
-			 _steering_direction * 10)
+			 _steering_direction * 6.0)
 
 
 func align_to_floor():
@@ -143,11 +144,13 @@ func apply_movement(delta: float):
 			_floor_normal = n
 			align_to_floor()
 		else:
-			_velocity = _velocity.bounce(n)
-			if _velocity.length() > 10:
-				_velocity = _velocity.normalized() * 10
+			_velocity = _velocity.bounce(n) * .75
+			_heading_direction = _heading_direction.rotated(_floor_normal, _steering_direction * 1/delta * 2.5)		
+			if _velocity.length() > 20:
+				_velocity = _velocity.normalized() * 20
 			delta_vel = remainder.bounce(n)
 			reset_boost()
+			_current_energy -= 1.0
 		col = move_and_collide(delta_vel)
 	
 	$speed.text = str(_velocity.length())
@@ -158,6 +161,7 @@ func apply_movement(delta: float):
 func _start_moving():
 	_moving = true
 	_current_energy = _max_energy
+	add_boost(100, .25)
 
 
 func _update_energy(delta: float):

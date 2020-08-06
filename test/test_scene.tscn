@@ -26,17 +26,29 @@ void vertex(){
 void fragment() {
 	bool x_even = int(vertex_pos.x * .5) % 2 == 1;
 	bool z_even = int(vertex_pos.z * .5) % 2 == 1;
+	bool y_even = int(vertex_pos.y * .5) % 2 == 1;
 	
-	if(x_even && z_even)
+	if(sign(vertex_pos.x) < 0.0)
+		x_even = !x_even;
+	if(sign(vertex_pos.z) < 0.0)
+		z_even = !z_even;
+	if(sign(vertex_pos.y) < 0.0)
+		y_even = !y_even;
+	
+	if(y_even){
+		x_even = !x_even;
+	}
+	
+	if(x_even && z_even || !x_even && !z_even)
 		ALBEDO = c2.xyz;
 	else
 		ALBEDO = c1.xyz;
 }"
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=9]
 shader = SubResource( 3 )
 shader_param/c1 = Color( 0.898039, 0.898039, 0.898039, 1 )
-shader_param/c2 = Color( 0.866667, 0.866667, 0.866667, 1 )
+shader_param/c2 = Color( 0.529412, 0.529412, 0.529412, 1 )
 
 [sub_resource type="SpatialMaterial" id=5]
 albedo_color = Color( 0.282353, 0.282353, 0.282353, 1 )
@@ -52,7 +64,7 @@ extents = Vector3( 5, 2, 5 )
 material = SubResource( 5 )
 size = Vector3( 10, 8, 50 )
 
-[sub_resource type="BoxShape" id=9]
+[sub_resource type="BoxShape" id=15]
 extents = Vector3( 5, 4, 25 )
 
 [sub_resource type="CubeMesh" id=10]
@@ -106,7 +118,7 @@ shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="track/main_ground"]
 mesh = SubResource( 2 )
-material/0 = SubResource( 4 )
+material/0 = SubResource( 9 )
 
 [node name="StaticBody" type="StaticBody" parent="track"]
 transform = Transform( 1, 0, 0, 0, 0.954089, -0.299524, 0, 0.299524, 0.954089, 0, 0.256514, 0 )
@@ -200,7 +212,7 @@ mesh = SubResource( 8 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="track/StaticBody2"]
-shape = SubResource( 9 )
+shape = SubResource( 15 )
 
 [node name="StaticBody3" type="StaticBody" parent="track"]
 transform = Transform( 0.858163, 0.153768, 0.489807, 0, 0.954089, -0.299524, -0.513377, 0.25704, 0.818764, 41.3593, 16.6567, -58.981 )
@@ -211,7 +223,7 @@ mesh = SubResource( 8 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="track/StaticBody3"]
-shape = SubResource( 9 )
+shape = SubResource( 15 )
 
 [node name="StaticBody4" type="StaticBody" parent="track"]
 transform = Transform( 0.908012, -0.418945, 6.82548e-08, 0, -1.62921e-07, -1, 0.418945, 0.908012, -1.47934e-07, 57.8234, -12.0262, -30.9196 )
@@ -234,7 +246,7 @@ mesh = SubResource( 8 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="track/StaticBody5"]
-shape = SubResource( 9 )
+shape = SubResource( 15 )
 
 [node name="StaticBody6" type="StaticBody" parent="track"]
 transform = Transform( 0.850508, 0.525962, -8.569e-08, 0, -1.62921e-07, -1, -0.525962, 0.850508, -1.38565e-07, 24.6029, 2.94773, -86.8487 )
@@ -257,7 +269,7 @@ mesh = SubResource( 8 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="track/StaticBody7"]
-shape = SubResource( 9 )
+shape = SubResource( 15 )
 
 [node name="StaticBody8" type="StaticBody" parent="track"]
 transform = Transform( 0.0235248, 0.999723, -1.62876e-07, 0, -1.62921e-07, -1, -0.999723, 0.0235248, -3.83268e-09, -40.3253, 17.905, -89.7931 )
@@ -280,7 +292,7 @@ mesh = SubResource( 8 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="track/StaticBody9"]
-shape = SubResource( 9 )
+shape = SubResource( 15 )
 
 [node name="StaticBody10" type="StaticBody" parent="track"]
 transform = Transform( -0.803047, 0.595917, -9.70871e-08, 0, -1.62921e-07, -1, -0.595917, -0.803046, 1.30833e-07, -78.2265, 32.9209, -36.8501 )
@@ -324,6 +336,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -31.6176, 0.970133, 24.0497 )
 
 [node name="SpeedBoost4" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 141.337, 0.594671, 78.7389 )
+
+[node name="SpeedBoost8" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 208.44, 8.62473, -60.7283 )
 
 [node name="SpeedBoost5" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 129.375, 2.2613, 77.3044 )

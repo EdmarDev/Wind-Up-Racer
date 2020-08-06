@@ -6,6 +6,7 @@ var _warp_pos: Vector3
 
 func _ready() -> void:
 	target = get_node("../vehicle")
+	look_at(target.global_transform.origin + Vector3.UP * 1.5 , Vector3.UP)
 	
 
 
