@@ -8,22 +8,20 @@ albedo_color = Color( 0.00392157, 0.65098, 1, 1 )
 [sub_resource type="PrismMesh" id=2]
 material = SubResource( 1 )
 left_to_right = 0.0
-size = Vector3( 2, 0.8, 1.5 )
+size = Vector3( 1.3, 0.8, 1.3 )
 
-[sub_resource type="CapsuleShape" id=3]
+[sub_resource type="SphereShape" id=3]
 radius = 0.6
-height = 0.8
 
 [node name="vehicle" type="KinematicBody"]
 script = ExtResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 0.527689, 0 )
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 0, 0 )
 mesh = SubResource( 2 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.613848, 0 )
 shape = SubResource( 3 )
 
 [node name="friction" type="Label" parent="."]

@@ -1,20 +1,31 @@
 extends Camera
 
 var target: Vehicle
-var max_distance := 7
+var max_distance := 5
+var _warp_pos: Vector3
 
 func _ready() -> void:
 	target = get_node("../vehicle")
+	target.connect("warp_set", self, "_on_target_warp_set")
+	target.connect("warped", self, "_on_target_warped")
+	
 
 
 func _physics_process(delta: float) -> void:
 	var target_pos := target.global_transform.origin
 	var self_pos := global_transform.origin
-	look_at(target_pos, Vector3.UP)
+	look_at(target_pos + Vector3.UP * 1.5, Vector3.UP)
 	target_pos.y = 0
 	self_pos.y = 0
 	if self_pos.distance_to(target_pos) > max_distance:
 		var future_pos := target_pos - (target_pos - self_pos).normalized() * max_distance
-		future_pos.y = target.global_transform.origin.y + 5
+		future_pos.y = target.global_transform.origin.y + 3.5
 		global_transform.origin = future_pos
 		
+
+func _on_target_warp_set():
+	_warp_pos = translation
+
+
+func _on_target_warped():
+	translation = _warp_pos
