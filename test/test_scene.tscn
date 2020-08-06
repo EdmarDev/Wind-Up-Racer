@@ -297,6 +297,7 @@ shape = SubResource( 11 )
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.623102, 0.587432, -0.516399, 0, 0.660238, 0.751057, 0.782141, -0.467985, 0.411395, 0, 19.4968, 0 )
 light_color = Color( 1, 0.988235, 0.960784, 1 )
+shadow_enabled = true
 
 [node name="DirectionalLight2" type="DirectionalLight" parent="."]
 transform = Transform( -0.623102, -0.587432, 0.516399, 0, 0.660238, 0.751057, -0.782141, 0.467985, -0.411395, 0, 19.4968, 0 )
@@ -304,10 +305,10 @@ light_color = Color( 1, 0.988235, 0.960784, 1 )
 light_energy = 0.3
 
 [node name="vehicle" parent="." instance=ExtResource( 1 )]
-transform = Transform( -0.274396, 0, -0.961617, 0, 1, 0, 0.961617, 0, -0.274396, 65.2906, 1.89425, 47.3444 )
+transform = Transform( -0.274396, 0, -0.961617, 0, 1, 0, 0.961617, 0, -0.274396, 76.0605, 1.89425, 52.2574 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( -1.62921e-07, 0.707107, -0.707107, 0, 0.707107, 0.707107, 1, 1.15203e-07, -1.15203e-07, 57.724, 3.5, 47.447 )
+transform = Transform( -1.62921e-07, 0.707107, -0.707107, 0, 0.707107, 0.707107, 1, 1.15203e-07, -1.15203e-07, 68.494, 2.5, 52.36 )
 fov = 85.0
 far = 500.0
 script = ExtResource( 2 )
@@ -322,10 +323,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3785, 0.970133, 9.66 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -31.6176, 0.970133, 24.0497 )
 
 [node name="SpeedBoost4" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 136.542, 0.594671, 78.7389 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 141.337, 0.594671, 78.7389 )
 
 [node name="SpeedBoost5" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 129.375, 0.594671, 77.3044 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 129.375, 2.2613, 77.3044 )
 
 [node name="SpeedBoost6" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 122.578, 0.594671, 73.3146 )

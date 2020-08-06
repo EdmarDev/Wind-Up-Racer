@@ -5,20 +5,25 @@ var drifting := .25
 var _wheel_base := 1.9
 var _velocity: Vector3
 var _acceleration :=  35.0
+var _jump_impulse := 10.0
 var _heading_direction: Vector3
 var _steering_direction: float
 var _steering_angle := 9
-var _gravity := 15.0
+var _gravity := 20.0
 var _friction := .9
 var _drag := 0.06
 
 var _is_on_floor := false
+var _can_jump := true
+var _jump_timer := 0.0
+var _jump_leniency := .15
 var _floor_normal := Vector3.UP
 var _look_dir := Vector3.ZERO
 
 var _current_energy := 0.0
 var _max_energy := 10.0
 var _brake_energy_cost := 2.0
+var _jump_energy_cost := .25
 var _moving := false
 
 var _acceleration_boost := 0.0
@@ -34,6 +39,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_update_energy(delta)
 	_update_boost(delta)
+	_update_jump(delta)
 
 
 func _physics_process(delta: float) -> void:
@@ -42,6 +48,12 @@ func _physics_process(delta: float) -> void:
 			_steering_direction += deg2rad(_steering_angle * delta)
 	if Input.is_action_pressed("steer_right"):
 			_steering_direction += -deg2rad(_steering_angle * delta)
+	
+	if _can_jump and Input.is_action_just_pressed("jump"):
+		_velocity += Vector3.UP * _jump_impulse
+		_current_energy -= _jump_energy_cost
+		_jump_timer = 0.0
+		_can_jump = false
 	
 	if _is_on_floor:
 		var f := _friction
@@ -53,20 +65,24 @@ func _physics_process(delta: float) -> void:
 				_current_energy -= delta * _brake_energy_cost
 		
 		steering(delta)
-	
+		
 		f *= delta
-		if _velocity.length() < 2:
+		if _velocity.length() < 3:
 			f *= 3
 		$friction.text = str((_velocity * f).length() * 1/delta)
 		_velocity -= _velocity * f
-	
-		$drag.text = str(_current_energy)#str(((_velocity * _velocity.length() * _drag * delta).length())/delta)
 		_velocity -= _velocity * _velocity.length() * _drag * delta
+	else:
+		_air_steering(delta)
 	
-	_look_dir = _look_dir.move_toward(_heading_direction, 2.0 * delta)
+	_look_dir = _look_dir.move_toward(_heading_direction, 1.35 * delta)
 	look_at(global_transform.origin + _look_dir, Vector3.UP)
 	
-	_velocity.y -= _gravity * delta
+	if not _is_on_floor and _velocity.y < 0:
+		_velocity.y -= _gravity * 2 * delta
+	else:
+		_velocity.y -= _gravity * delta
+	
 	apply_movement(delta)
 
 
@@ -86,6 +102,11 @@ func steering(delta: float):
 		_velocity = _velocity.linear_interpolate(target_vel, (1/drifting) * delta)
 	else:
 		_velocity =  -_heading_direction * _velocity.length()
+
+
+func _air_steering(delta: float):
+	_heading_direction = _heading_direction.rotated(Vector3.UP,
+			 _steering_direction * 10)
 
 
 func align_to_floor():
@@ -145,6 +166,8 @@ func _update_energy(delta: float):
 		_moving = false
 		if _velocity.length() < 0.1:
 			print("GameOver")
+	
+	$drag.text = str(_current_energy)
 
 
 func recover_energy(amount: float):
@@ -166,3 +189,11 @@ func add_boost(amount: float, duration: float):
 
 func reset_boost():
 	_boost_duration = 0.0
+
+
+func _update_jump(delta: float):
+	if _is_on_floor:
+		_jump_timer = _jump_leniency
+	else:
+		_jump_timer -= delta
+	_can_jump = _jump_timer > 0.0

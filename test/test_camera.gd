@@ -17,5 +17,5 @@ func _physics_process(delta: float) -> void:
 	self_pos.y = 0
 	if self_pos.distance_to(target_pos) > max_distance:
 		var future_pos := target_pos - (target_pos - self_pos).normalized() * max_distance
-		future_pos.y = target.global_transform.origin.y + 3.5
+		future_pos.y = target.global_transform.origin.y + 2.5
 		global_transform.origin = future_pos
