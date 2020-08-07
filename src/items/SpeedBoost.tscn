@@ -14,6 +14,7 @@ size = Vector3( 0.5, 0.5, 0.5 )
 
 [node name="SpeedBoost" type="Area"]
 script = ExtResource( 1 )
+energy_recover = 1.5
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.460577, 0 )
@@ -25,4 +26,3 @@ shape = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.461718, 0 )
 mesh = SubResource( 3 )
 material/0 = null
-[connection signal="body_entered" from="." to="." method="_on_SpeedBoost_body_entered"]

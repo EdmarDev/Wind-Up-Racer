@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/items/SpeedBoost.gd" type="Script" id=1]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 1, 0.945098, 0.345098, 1 )
+
+[sub_resource type="CubeMesh" id=2]
+material = SubResource( 1 )
+size = Vector3( 1.5, 1.5, 1.5 )
+
+[sub_resource type="SphereShape" id=3]
+radius = 1.2
+
+[node name="BigBoost" type="Area"]
+script = ExtResource( 1 )
+energy_recover = 7.5
+boost_strength = 25.0
+boost_duration = 1.5
+
+[node name="visual" type="Spatial" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="visual"]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 3 )

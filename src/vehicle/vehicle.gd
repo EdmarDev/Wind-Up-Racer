@@ -5,11 +5,11 @@ var drifting := .25
 var _wheel_base := 1.9
 var _velocity: Vector3
 var _acceleration :=  35.0
-var _jump_impulse := 10.0
+var _jump_impulse := 15.0
 var _heading_direction: Vector3
 var _steering_direction: float
 var _steering_angle := 9
-var _gravity := 25.0
+var _gravity := 40.0
 var _friction := .9
 var _drag := 0.06
 
@@ -21,9 +21,8 @@ var _floor_normal := Vector3.UP
 var _look_dir := Vector3.ZERO
 
 var _current_energy := 0.0
-var _max_energy := 120.0
-var _brake_energy_cost := 2.5
-var _jump_energy_cost := .25
+var _max_energy := 20.0
+var _brake_energy_cost := 3.5
 var _moving := false
 
 var _acceleration_boost := 0.0
@@ -52,7 +51,6 @@ func _physics_process(delta: float) -> void:
 	
 	if _can_jump and Input.is_action_just_pressed("jump"):
 		_velocity += Vector3.UP * _jump_impulse
-		_current_energy -= _jump_energy_cost
 		_jump_timer = 0.0
 		_can_jump = false
 	
@@ -80,7 +78,7 @@ func _physics_process(delta: float) -> void:
 	look_at(global_transform.origin + _look_dir, Vector3.UP)
 	
 	if not _is_on_floor and _velocity.y < 0:
-		_velocity.y -= _gravity * 2.5 * delta
+		_velocity.y -= _gravity * 1.5 * delta
 	else:
 		_velocity.y -= _gravity * delta
 	
@@ -150,7 +148,7 @@ func apply_movement(delta: float):
 				_velocity = _velocity.normalized() * 20
 			delta_vel = remainder.bounce(n)
 			reset_boost()
-			_current_energy -= 1.0
+			_current_energy -= 3.0
 		col = move_and_collide(delta_vel)
 	
 	$speed.text = str(_velocity.length())

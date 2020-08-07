@@ -1,8 +1,10 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/vehicle/vehicle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://test/test_camera.gd" type="Script" id=2]
 [ext_resource path="res://test/test_mat.material" type="Material" id=3]
+[ext_resource path="res://src/items/SpeedBoost.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/items/BigBoost.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type spatial;
@@ -66,34 +68,34 @@ size = Vector3( 12, 1, 10 )
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 6, 0.5, 5 )
 
-[sub_resource type="CubeMesh" id=11]
+[sub_resource type="CubeMesh" id=8]
 material = SubResource( 5 )
 size = Vector3( 20, 1, 10 )
 
-[sub_resource type="BoxShape" id=12]
+[sub_resource type="BoxShape" id=9]
 extents = Vector3( 10, 0.5, 5 )
 
-[sub_resource type="CubeMesh" id=8]
+[sub_resource type="CubeMesh" id=10]
 material = ExtResource( 3 )
-size = Vector3( 4, 10, 20 )
+size = Vector3( 2, 10, 40 )
 
-[sub_resource type="BoxShape" id=13]
-extents = Vector3( 2, 5, 10 )
+[sub_resource type="BoxShape" id=16]
+extents = Vector3( 1, 5, 20 )
 
-[sub_resource type="CubeMesh" id=14]
+[sub_resource type="CubeMesh" id=12]
 material = ExtResource( 3 )
 size = Vector3( 2, 10, 7.5 )
 
-[sub_resource type="BoxShape" id=15]
+[sub_resource type="BoxShape" id=13]
 extents = Vector3( 1, 5, 3.75 )
 
-[sub_resource type="ShaderMaterial" id=9]
+[sub_resource type="ShaderMaterial" id=14]
 shader = SubResource( 1 )
 shader_param/c1 = Color( 0.898039, 0.898039, 0.898039, 1 )
 shader_param/c2 = Color( 0.529412, 0.529412, 0.529412, 1 )
 
-[sub_resource type="CylinderMesh" id=10]
-material = SubResource( 9 )
+[sub_resource type="CylinderMesh" id=15]
+material = SubResource( 14 )
 height = 10.0
 rings = 8
 
@@ -129,7 +131,6 @@ material = SubResource( 5 )
 transform = Transform( 0.9089, 0.178929, -0.376677, -0.193156, 0.981168, -9.51979e-09, 0.369583, 0.0727573, 0.926345, -28.484, -9.53674e-07, -70.9745 )
 
 [node name="MeshInstance" type="MeshInstance" parent="road/StaticBody2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = SubResource( 6 )
 material/0 = null
 
@@ -140,7 +141,6 @@ shape = SubResource( 7 )
 transform = Transform( 0.965162, -0.225133, 0.133329, 0.227161, 0.973857, 0, -0.129843, 0.0302872, 0.991072, -7.61161, 6.03787, 77.7558 )
 
 [node name="MeshInstance" type="MeshInstance" parent="road/StaticBody3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = SubResource( 6 )
 material/0 = null
 
@@ -151,7 +151,6 @@ shape = SubResource( 7 )
 transform = Transform( 0.995123, 0, 0.0986424, 0, 1, 0, -0.0986424, 0, 0.995123, 6.79062, 8.54852, 74.8911 )
 
 [node name="MeshInstance" type="MeshInstance" parent="road/StaticBody4"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = SubResource( 6 )
 material/0 = null
 
@@ -162,7 +161,6 @@ shape = SubResource( 7 )
 transform = Transform( 0.995123, 0, 0.0986424, 0, 1, 0, -0.0986424, 0, 0.995123, 22.801, 9.13503, 70.7403 )
 
 [node name="MeshInstance" type="MeshInstance" parent="road/StaticBody5"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = SubResource( 6 )
 material/0 = null
 
@@ -184,46 +182,328 @@ shape = SubResource( 7 )
 transform = Transform( 0.0464574, -0.00887819, 0.998881, 0.187707, 0.982225, -9.14768e-10, -0.981126, 0.187497, 0.0472981, 37.8935, 11.7117, 49.0448 )
 
 [node name="MeshInstance" type="MeshInstance" parent="road/StaticBody6"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-mesh = SubResource( 11 )
+mesh = SubResource( 8 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="road/StaticBody6"]
-shape = SubResource( 12 )
+shape = SubResource( 9 )
 
 [node name="walls" type="Spatial" parent="."]
 
 [node name="StaticBody" type="StaticBody" parent="walls"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2233, 0, -73.9699 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2233, 0, -63.9398 )
 
 [node name="MeshInstance" type="MeshInstance" parent="walls/StaticBody"]
-mesh = SubResource( 8 )
+mesh = SubResource( 10 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="walls/StaticBody"]
-shape = SubResource( 13 )
+shape = SubResource( 16 )
 
 [node name="StaticBody2" type="StaticBody" parent="walls"]
 transform = Transform( 0.879208, 0, 0.476438, 0, 1, 0, -0.476438, 0, 0.879208, -24.007, 4.56671, -12.6683 )
 
 [node name="MeshInstance" type="MeshInstance" parent="walls/StaticBody2"]
 transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, 0, 0, 1, 0.345049, 0, 0.0887012 )
-mesh = SubResource( 14 )
+mesh = SubResource( 12 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="walls/StaticBody2"]
-shape = SubResource( 15 )
+shape = SubResource( 13 )
 
 [node name="StaticBody3" type="StaticBody" parent="walls"]
 transform = Transform( 0.99684, -0.0116436, 0.0785754, 0, 0.989198, 0.146584, -0.0794334, -0.146121, 0.986073, -29.4326, 2.6556, -27.8445 )
 
 [node name="MeshInstance" type="MeshInstance" parent="walls/StaticBody3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-mesh = SubResource( 14 )
+mesh = SubResource( 12 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="walls/StaticBody3"]
-shape = SubResource( 15 )
+shape = SubResource( 13 )
+
+[node name="items" type="Spatial" parent="."]
+
+[node name="SpeedBoost" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -82.3399, 2.01525, 39.195 )
+
+[node name="SpeedBoost81" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -80.0097, 2.01525, 36.5063 )
+
+[node name="SpeedBoost82" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -85.2765, 2.01525, 42.2631 )
+
+[node name="SpeedBoost83" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -72.2532, 3.07909, 51.0729 )
+
+[node name="SpeedBoost2" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, -74.7776, 3.04311, 53.6722 )
+
+[node name="SpeedBoost3" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, -69.5804, 3.19611, 48.0323 )
+
+[node name="SpeedBoost4" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, -60.2383, 3.18533, 68.5427 )
+
+[node name="SpeedBoost5" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, -60.2383, 5.82261, 68.5427 )
+
+[node name="SpeedBoost6" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, -34.6482, 3.5793, 90.1059 )
+
+[node name="SpeedBoost7" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, -27.2242, 3.79642, 92.767 )
+
+[node name="SpeedBoost8" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, -16.7366, 4.93785, 93.9523 )
+
+[node name="SpeedBoost9" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, -7.78535, 6.81318, 77.6813 )
+
+[node name="SpeedBoost10" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, 6.8446, 9.30526, 75.0709 )
+
+[node name="SpeedBoost11" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, 22.729, 9.72298, 70.8384 )
+
+[node name="SpeedBoost12" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, 36.4422, 10.1463, 66.6268 )
+
+[node name="SpeedBoost13" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, 37.9013, 12.6101, 47.2391 )
+
+[node name="BigBoost" parent="items" instance=ExtResource( 5 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, 38.6456, 18.1336, 33.8118 )
+
+[node name="SpeedBoost14" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, 26.1189, 4.62801, 88.7919 )
+
+[node name="SpeedBoost15" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, 30.5806, 5.84956, 87.0967 )
+
+[node name="SpeedBoost16" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, 34.5814, 3.6989, 85.7119 )
+
+[node name="SpeedBoost17" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, 39.6213, 3.6989, 77.2559 )
+
+[node name="BigBoost2" parent="items" instance=ExtResource( 5 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, 46.2832, 13.5248, 68.964 )
+
+[node name="SpeedBoost18" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, 61.2961, 0.496222, 65.0762 )
+
+[node name="SpeedBoost19" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, 66.1729, 0.496222, 70.482 )
+
+[node name="SpeedBoost20" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, 82.7832, 0.372336, 50.3727 )
+
+[node name="SpeedBoost21" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, 82.1569, 0.394364, 43.0208 )
+
+[node name="SpeedBoost22" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, 69.9602, 1.69956, 48.844 )
+
+[node name="SpeedBoost23" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, 62.694, 0.452471, 35.7789 )
+
+[node name="SpeedBoost24" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, 51.2273, 0.498348, 30.9805 )
+
+[node name="SpeedBoost25" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, 39.9629, 0.410541, 19.9911 )
+
+[node name="SpeedBoost26" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.976631, 0, -0.214923, 0, 1, 0, 0.214923, 0, 0.976631, 38.0732, 0.354814, 4.07644 )
+
+[node name="SpeedBoost27" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.976631, 0, -0.214923, 0, 1, 0, 0.214923, 0, 0.976631, 42.0556, 0.354814, 5.93056 )
+
+[node name="SpeedBoost28" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.976631, 0, -0.214923, 0, 1, 0, 0.214923, 0, 0.976631, 46.0338, 0.354814, 7.79752 )
+
+[node name="SpeedBoost29" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 59.1325, 0.354815, -5.21475 )
+
+[node name="SpeedBoost30" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 59.0697, 0.354815, -0.822325 )
+
+[node name="SpeedBoost31" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 58.9935, 0.354815, 3.57153 )
+
+[node name="SpeedBoost32" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 76.7132, 0.304788, -6.24439 )
+
+[node name="SpeedBoost33" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 80.2805, 0.304788, 0.699172 )
+
+[node name="SpeedBoost34" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 84.7976, 2.01302, -12.4113 )
+
+[node name="SpeedBoost35" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 95.6742, 0.366475, -34.6436 )
+
+[node name="SpeedBoost87" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 90.0985, 0.366475, -34.6436 )
+
+[node name="SpeedBoost36" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 93.3171, 0.433974, -48.2674 )
+
+[node name="SpeedBoost37" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 70.8796, 0.367146, -38.9606 )
+
+[node name="BigBoost3" parent="items" instance=ExtResource( 5 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, 64.2198, 1.51531, -35.5213 )
+
+[node name="SpeedBoost38" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 58.4261, 0.367146, -32.3424 )
+
+[node name="SpeedBoost85" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 59.2568, 0.367146, -28.3441 )
+
+[node name="SpeedBoost86" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 57.5371, 0.367146, -36.622 )
+
+[node name="SpeedBoost39" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 32.2729, 0.375698, -36.6083 )
+
+[node name="SpeedBoost40" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 34.2049, 0.414037, -42.9185 )
+
+[node name="SpeedBoost41" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 35.4918, 0.500769, -49.2773 )
+
+[node name="SpeedBoost42" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 28.5177, 0.500769, -61.4969 )
+
+[node name="SpeedBoost43" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 21.3168, 0.159411, -86.9215 )
+
+[node name="SpeedBoost44" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 21.1405, -0.362751, -93.3268 )
+
+[node name="SpeedBoost45" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 20.9138, -0.586663, -99.5211 )
+
+[node name="SpeedBoost46" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 15.0837, 0.539339, -72.127 )
+
+[node name="SpeedBoost84" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.203402, 0, -0.979095, 0, 1, 0, 0.979095, 0, 0.203402, 10.5843, 0.539339, -72.0885 )
+
+[node name="SpeedBoost47" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, 17.4683, 3.19347, -40.8966 )
+
+[node name="SpeedBoost48" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, 19.8539, 3.41737, -37.8532 )
+
+[node name="SpeedBoost49" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, 14.6765, 3.41737, -38.1175 )
+
+[node name="SpeedBoost50" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, 21.8089, 3.88598, -33.9844 )
+
+[node name="SpeedBoost51" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, 17.4389, 3.88598, -33.8922 )
+
+[node name="SpeedBoost52" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, 13.2511, 3.88598, -34.1913 )
+
+[node name="SpeedBoost53" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, 21.9268, 5.09622, -22.4292 )
+
+[node name="SpeedBoost54" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, 17.5568, 5.09622, -22.3369 )
+
+[node name="SpeedBoost55" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, 13.369, 5.09622, -22.636 )
+
+[node name="SpeedBoost56" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, 16.1989, 6.90975, -0.23292 )
+
+[node name="SpeedBoost57" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, 9.74862, 7.29806, 4.6568 )
+
+[node name="SpeedBoost58" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, -0.601978, 7.49668, 6.87478 )
+
+[node name="SpeedBoost59" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, -10.4597, 7.00884, 5.27291 )
+
+[node name="SpeedBoost60" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, -0.170649, 7.35068, -1.33804 )
+
+[node name="SpeedBoost61" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, -26.7019, 4.34294, -10.8275 )
+
+[node name="SpeedBoost62" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, -20.6921, 4.34294, -14.6364 )
+
+[node name="SpeedBoost63" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, -26.3235, 2.49993, -28.1022 )
+
+[node name="SpeedBoost64" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, -33.2232, 2.33497, -27.9614 )
+
+[node name="BigBoost4" parent="items" instance=ExtResource( 5 )]
+transform = Transform( 0.999995, 0, -0.00310668, 0, 1, 0, 0.00310668, 0, 0.999995, -27.4932, 4.8774, -20.1379 )
+
+[node name="SpeedBoost65" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, -26.5259, 0.679196, -41.356 )
+
+[node name="SpeedBoost66" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, -20.4942, 0.274753, -50.7386 )
+
+[node name="SpeedBoost67" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, -13.2612, 2.18109, -66.0082 )
+
+[node name="SpeedBoost68" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, -24.8491, 0.51464, -93.4178 )
+
+[node name="SpeedBoost69" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, -24.8931, 0.51464, -100.886 )
+
+[node name="SpeedBoost70" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, -41.0564, 0.293247, -89.1988 )
+
+[node name="SpeedBoost71" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.173167, 0, -0.984892, 0, 1, 0, 0.984892, 0, 0.173167, -34.7805, 0.293247, -85.4096 )
+
+[node name="SpeedBoost72" parent="items" instance=ExtResource( 4 )]
+transform = Transform( -0.422033, 0, -0.906581, 0, 1, 0, 0.906581, 0, -0.422033, -59.7882, 0.268117, -57.9812 )
+
+[node name="SpeedBoost73" parent="items" instance=ExtResource( 4 )]
+transform = Transform( -0.422033, 0, -0.906581, 0, 1, 0, 0.906581, 0, -0.422033, -56.8131, 0.268117, -51.2809 )
+
+[node name="SpeedBoost74" parent="items" instance=ExtResource( 4 )]
+transform = Transform( -0.422033, 0, -0.906581, 0, 1, 0, 0.906581, 0, -0.422033, -58.2936, 0.268117, -54.2202 )
+
+[node name="SpeedBoost75" parent="items" instance=ExtResource( 4 )]
+transform = Transform( -0.569739, 0, -0.821826, 0, 1, 0, 0.821826, 0, -0.569739, -75.0655, 0.40084, -53.5669 )
+
+[node name="SpeedBoost76" parent="items" instance=ExtResource( 4 )]
+transform = Transform( -0.569739, 0, -0.821826, 0, 1, 0, 0.821826, 0, -0.569739, -73.2704, 0.40084, -46.459 )
+
+[node name="SpeedBoost77" parent="items" instance=ExtResource( 4 )]
+transform = Transform( -0.569739, 0, -0.821826, 0, 1, 0, 0.821826, 0, -0.569739, -74.2307, 2.31039, -49.6068 )
+
+[node name="SpeedBoost78" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.330679, 0, -0.943743, 0, 1, 0, 0.943743, 0, 0.330679, -95.937, 0.268117, -38.3243 )
+
+[node name="SpeedBoost79" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.330679, 0, -0.943743, 0, 1, 0, 0.943743, 0, 0.330679, -89.1295, 0.268117, -35.6036 )
+
+[node name="SpeedBoost80" parent="items" instance=ExtResource( 4 )]
+transform = Transform( 0.330679, 0, -0.943743, 0, 1, 0, 0.943743, 0, 0.330679, -92.2414, 2.24323, -36.6746 )
+
+[node name="BigBoost5" parent="items" instance=ExtResource( 5 )]
+transform = Transform( 0.999733, 0, -0.0230887, 0, 1, 0, 0.0230887, 0, 0.999733, -100.148, 1.47656, -14.1022 )
+
+[node name="BigBoost7" parent="items" instance=ExtResource( 5 )]
+transform = Transform( 0.999733, 0, -0.0230887, 0, 1, 0, 0.0230887, 0, 0.999733, -28.2473, 2.0795, -70.9388 )
+
+[node name="BigBoost6" parent="items" instance=ExtResource( 5 )]
+transform = Transform( 0.999733, 0, -0.0230887, 0, 1, 0, 0.0230887, 0, 0.999733, -94.1455, 1.47656, -14.0914 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.994815, 0.029783, 0.0972399, -0.101699, 0.291337, 0.951199, 0, -0.956157, 0.292856, 0, 12.5705, 0 )
@@ -239,10 +519,10 @@ script = ExtResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -88.0643, 0, 0 )
-mesh = SubResource( 10 )
+mesh = SubResource( 15 )
 material/0 = null
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -104.701, 0, 0 )
-mesh = SubResource( 10 )
-material/0 = SubResource( 9 )
+mesh = SubResource( 15 )
+material/0 = SubResource( 14 )
