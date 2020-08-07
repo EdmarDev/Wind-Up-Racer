@@ -23,6 +23,10 @@ _global_script_class_icons={
 config/name="Brackeys Jam 2020.2"
 config/icon="res://icon.png"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "CSGExporter" )
+
 [input]
 
 brake={

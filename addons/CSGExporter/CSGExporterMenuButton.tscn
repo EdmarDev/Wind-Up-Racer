@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/CSGExporter/CSGExporterMenuButton.gd" type="Script" id=1]
+[ext_resource path="res://addons/CSGExporter/csg_exporter_icon.png" type="Texture" id=2]
+
+[node name="CSGExporterMenuButton" type="MenuButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Export CSG"
+icon = ExtResource( 2 )
+items = [ "Export to OBJ", null, 0, false, false, 0, 0, null, "", false ]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileDialog" type="FileDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -357.5
+margin_top = -226.5
+margin_right = 357.5
+margin_bottom = 226.5
+access = 2
+show_hidden_files = true
+current_dir = "/home/henrique/Dev/godot/projects/CSGExporter"
+current_path = "/home/henrique/Dev/godot/projects/CSGExporter/"
