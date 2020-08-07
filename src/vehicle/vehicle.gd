@@ -9,7 +9,7 @@ var _jump_impulse := 10.0
 var _heading_direction: Vector3
 var _steering_direction: float
 var _steering_angle := 9
-var _gravity := 20.0
+var _gravity := 25.0
 var _friction := .9
 var _drag := 0.06
 
@@ -80,7 +80,7 @@ func _physics_process(delta: float) -> void:
 	look_at(global_transform.origin + _look_dir, Vector3.UP)
 	
 	if not _is_on_floor and _velocity.y < 0:
-		_velocity.y -= _gravity * 2 * delta
+		_velocity.y -= _gravity * 2.5 * delta
 	else:
 		_velocity.y -= _gravity * delta
 	

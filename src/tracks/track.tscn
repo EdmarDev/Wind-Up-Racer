@@ -1,10 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/vehicle/vehicle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://test/test_camera.gd" type="Script" id=2]
 [ext_resource path="res://test/test_mat.material" type="Material" id=3]
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=1]
 code = "shader_type spatial;
 
 uniform vec4 c1 : hint_color = vec4(1, 1, 1, 1);
@@ -38,40 +38,61 @@ void fragment() {
 		ALBEDO = c1.xyz;
 }"
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 shader_param/c1 = Color( 0.843137, 0.803922, 0.631373, 1 )
 shader_param/c2 = Color( 0.741176, 0.709804, 0.572549, 1 )
 
-[sub_resource type="CylinderMesh" id=5]
-material = SubResource( 4 )
-top_radius = 90.0
-bottom_radius = 90.0
+[sub_resource type="CylinderMesh" id=3]
+material = SubResource( 2 )
+top_radius = 110.0
+bottom_radius = 110.0
 
-[sub_resource type="Curve3D" id=6]
+[sub_resource type="Curve3D" id=4]
 _data = {
-"points": PoolVector3Array( 0, 0, 0, -7.27443, 0, 4.7765, -50.337, -9.53674e-07, -59.7095, 2.75611, 0, -8.45936, -2.75611, 0, 8.45936, -71.9733, -9.53674e-07, -38.0732, -0.825344, 0, -4.41055, 0.825344, 0, 4.41055, -77.8741, -9.53674e-07, -13.8144, -1.49207, 0, -6.47675, 1.49207, 0, 6.47675, -74.268, -9.53674e-07, 17.3287, -3.43268, 0, -4.92924, 3.43268, 0, 4.92924, -61.1142, 2.55788, 46.8362, -7.04746, 0, -2.73391, 7.04746, 0, 2.73391, -30.0052, 3.11927, 71.6773, -7.90776, 0, 0.464603, 7.90776, 0, -0.464603, 13.6659, 5.97605, 74.6161, -7.86009, 0, 3.7104, 7.86009, 0, -3.7104, 47.7736, -9.53674e-07, 55.8311, 2.97643, 0, 8.11758, -2.97643, 0, -8.11758, 61.376, -9.53674e-07, 38.1663, 3.06187, 0, 6.41719, -3.06187, 0, -6.41719, 41.8938, -9.53674e-07, 25.7194, -6.25819, 0, 5.89008, 6.25819, 0, -5.89008, 44.9557, -9.53674e-07, 1.94996, -5.15384, 0, 8.8351, 5.15384, 0, -8.8351, 71.0929, -9.53674e-07, -7.62141, 4.04942, 0, 10.3076, -4.04942, 0, -10.3076, 78.4555, -9.53674e-07, -30.8136, 10.9404, 0, 2.65826, -10.9404, 0, -2.65826, 36.1563, -9.53674e-07, -14.6447, 0.206413, 0, 4.12819, -0.206413, 0, -4.12819, 25.423, -9.53674e-07, -51.592, 3.96097, 0, -0.339008, -3.96097, 0, 0.339008, 19.3193, -1.03402, -84.2126, 0.412819, 0, -5.57306, -0.412819, 0, 5.57306, 11.1807, -9.53674e-07, -48.7023, 11.8443, 0, -1.77374, -11.8443, 0, 1.77374, 4.36414, -9.53674e-07, 3.92773, 12.1415, 0, 8.71023, -12.1415, 0, -8.71023, -21.4007, -9.53674e-07, -16.8172, -6.07077, 0, 5.80682, 6.07077, 0, -5.80682, -22.9844, -9.53674e-07, -46.3791, 14.4929, 0, 7.19351, -14.4929, 0, -7.19351, -21.3895, -9.53674e-07, -79.9514, 0, 0, 0, -7.27443, 0, 4.7765, -50.337, -9.53674e-07, -59.7095 ),
+"points": PoolVector3Array( 11.4428, 0, -11.2108, -11.4428, 0, 11.2108, -50.337, -9.53674e-07, -59.7095, 7.35596, 0, -10.2984, -7.35596, 0, 10.2984, -88.6394, -9.53674e-07, -42.4807, 0, 0, -9.19496, 0, 0, 9.19496, -97.0988, -9.53674e-07, -12.3212, -2.20679, 0, -9.56277, 2.20679, 0, 9.56277, -93.7886, -9.53674e-07, 25.9298, -6.62037, 0, -13.9763, 6.62037, 0, 13.9763, -69.8817, 2.55788, 54.9859, -15.8153, 0, -6.25257, 15.8153, 0, 6.25257, -33.4697, 3.11926, 86.9843, -8.95272, 1.28802, 0.385963, 8.95272, -1.28802, -0.385963, 12.5051, 5.97604, 87.7199, -7.86009, 0, 3.7104, 7.86009, 0, -3.7104, 57.3766, -9.53674e-07, 72.2724, 2.97643, 0, 8.11758, -2.97643, 0, -8.11758, 79.4444, -9.53674e-07, 45.7909, 3.06187, 0, 6.41719, -3.06187, 0, -6.41719, 41.8938, -9.53674e-07, 25.7194, -6.25819, 0, 5.89008, 6.25819, 0, -5.89008, 44.9557, -9.53674e-07, 1.94996, -5.15384, 0, 8.8351, 5.15384, 0, -8.8351, 81.6512, -9.53674e-07, -5.70087, 4.04942, 0, 10.3076, -4.04942, 0, -10.3076, 91.9496, -9.53674e-07, -45.0553, 14.3442, 0, 4.04578, -14.3442, 0, -4.04578, 44.8714, -9.53674e-07, -30.3434, 0.206413, 0, 4.12819, -0.206413, 0, -4.12819, 26.8493, -9.53674e-07, -73.7436, 3.96097, 0, -0.339008, -3.96097, 0, 0.339008, 20.2289, -1.03401, -99.1217, 0.412819, 0, -5.57306, -0.412819, 0, 5.57306, 13.6085, -9.53674e-07, -73.7436, 23.4652, 0, -2.19057, -23.4652, 0, 2.19057, 4.09451, 6.96891, 2.87297, 4.77525, 0, 5.96907, -4.77525, 0, -5.96907, -24.1558, 3.9326, -13.7733, -11.5827, 0, 11.1813, 11.5827, 0, -11.1813, -22.9844, -9.53674e-07, -46.3791, 14.4929, 0, 7.19351, -14.4929, 0, -7.19351, -21.7001, -9.53674e-07, -96.5471, 0, 0, 0, -7.27443, 0, 4.7765, -50.337, -9.53674e-07, -59.7095 ),
 "tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
 }
 
-[sub_resource type="ShaderMaterial" id=7]
-shader = SubResource( 3 )
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 1 )
 shader_param/c1 = Color( 0.74902, 0.670588, 0.541176, 1 )
 shader_param/c2 = Color( 0.635294, 0.552941, 0.415686, 1 )
 
-[sub_resource type="CubeMesh" id=10]
+[sub_resource type="CubeMesh" id=6]
+material = SubResource( 5 )
+size = Vector3( 12, 1, 10 )
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 6, 0.5, 5 )
+
+[sub_resource type="CubeMesh" id=11]
+material = SubResource( 5 )
+size = Vector3( 20, 1, 10 )
+
+[sub_resource type="BoxShape" id=12]
+extents = Vector3( 10, 0.5, 5 )
+
+[sub_resource type="CubeMesh" id=8]
 material = ExtResource( 3 )
 size = Vector3( 4, 10, 20 )
 
-[sub_resource type="BoxShape" id=11]
+[sub_resource type="BoxShape" id=13]
 extents = Vector3( 2, 5, 10 )
 
+[sub_resource type="CubeMesh" id=14]
+material = ExtResource( 3 )
+size = Vector3( 2, 10, 7.5 )
+
+[sub_resource type="BoxShape" id=15]
+extents = Vector3( 1, 5, 3.75 )
+
 [sub_resource type="ShaderMaterial" id=9]
-shader = SubResource( 3 )
+shader = SubResource( 1 )
 shader_param/c1 = Color( 0.898039, 0.898039, 0.898039, 1 )
 shader_param/c2 = Color( 0.529412, 0.529412, 0.529412, 1 )
 
-[sub_resource type="CylinderMesh" id=8]
+[sub_resource type="CylinderMesh" id=10]
 material = SubResource( 9 )
 height = 10.0
 rings = 8
@@ -82,14 +103,14 @@ rings = 8
 
 [node name="base_ground" type="MeshInstance" parent="background"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0 )
-mesh = SubResource( 5 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="road" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.53674e-07, 2.38419e-07 )
 
 [node name="Path" type="Path" parent="road"]
-curve = SubResource( 6 )
+curve = SubResource( 4 )
 
 [node name="CSGPolygon" type="CSGPolygon" parent="road"]
 use_collision = true
@@ -102,48 +123,126 @@ path_rotation = 2
 path_local = false
 path_continuous_u = false
 path_joined = true
-material = SubResource( 7 )
+material = SubResource( 5 )
+
+[node name="StaticBody2" type="StaticBody" parent="road"]
+transform = Transform( 0.9089, 0.178929, -0.376677, -0.193156, 0.981168, -9.51979e-09, 0.369583, 0.0727573, 0.926345, -28.484, -9.53674e-07, -70.9745 )
+
+[node name="MeshInstance" type="MeshInstance" parent="road/StaticBody2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 6 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="road/StaticBody2"]
+shape = SubResource( 7 )
+
+[node name="StaticBody3" type="StaticBody" parent="road"]
+transform = Transform( 0.965162, -0.225133, 0.133329, 0.227161, 0.973857, 0, -0.129843, 0.0302872, 0.991072, -7.61161, 6.03787, 77.7558 )
+
+[node name="MeshInstance" type="MeshInstance" parent="road/StaticBody3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 6 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="road/StaticBody3"]
+shape = SubResource( 7 )
+
+[node name="StaticBody4" type="StaticBody" parent="road"]
+transform = Transform( 0.995123, 0, 0.0986424, 0, 1, 0, -0.0986424, 0, 0.995123, 6.79062, 8.54852, 74.8911 )
+
+[node name="MeshInstance" type="MeshInstance" parent="road/StaticBody4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 6 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="road/StaticBody4"]
+shape = SubResource( 7 )
+
+[node name="StaticBody5" type="StaticBody" parent="road"]
+transform = Transform( 0.995123, 0, 0.0986424, 0, 1, 0, -0.0986424, 0, 0.995123, 22.801, 9.13503, 70.7403 )
+
+[node name="MeshInstance" type="MeshInstance" parent="road/StaticBody5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 6 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="road/StaticBody5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 7.45058e-09, 0, 1, 0, 0, 0 )
+shape = SubResource( 7 )
+
+[node name="StaticBody7" type="StaticBody" parent="road"]
+transform = Transform( 0.0641319, 0, 0.997941, 0, 1, 0, -0.997941, 0, 0.0641319, 36.421, 9.43508, 66.5029 )
+
+[node name="MeshInstance" type="MeshInstance" parent="road/StaticBody7"]
+mesh = SubResource( 6 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="road/StaticBody7"]
+shape = SubResource( 7 )
+
+[node name="StaticBody6" type="StaticBody" parent="road"]
+transform = Transform( 0.0464574, -0.00887819, 0.998881, 0.187707, 0.982225, -9.14768e-10, -0.981126, 0.187497, 0.0472981, 37.8935, 11.7117, 49.0448 )
+
+[node name="MeshInstance" type="MeshInstance" parent="road/StaticBody6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="road/StaticBody6"]
+shape = SubResource( 12 )
 
 [node name="walls" type="Spatial" parent="."]
 
 [node name="StaticBody" type="StaticBody" parent="walls"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.376, 0, -68.082 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2233, 0, -73.9699 )
 
 [node name="MeshInstance" type="MeshInstance" parent="walls/StaticBody"]
-mesh = SubResource( 10 )
+mesh = SubResource( 8 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="walls/StaticBody"]
-shape = SubResource( 11 )
+shape = SubResource( 13 )
 
 [node name="StaticBody2" type="StaticBody" parent="walls"]
-transform = Transform( -0.557397, 0, -0.830246, 0, 1, 0, 0.830246, 0, -0.557397, -65.3689, 3.91486, 49.3638 )
+transform = Transform( 0.879208, 0, 0.476438, 0, 1, 0, -0.476438, 0, 0.879208, -24.007, 4.56671, -12.6683 )
 
 [node name="MeshInstance" type="MeshInstance" parent="walls/StaticBody2"]
-mesh = SubResource( 10 )
+transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, 0, 0, 1, 0.345049, 0, 0.0887012 )
+mesh = SubResource( 14 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="walls/StaticBody2"]
-shape = SubResource( 11 )
+shape = SubResource( 15 )
+
+[node name="StaticBody3" type="StaticBody" parent="walls"]
+transform = Transform( 0.99684, -0.0116436, 0.0785754, 0, 0.989198, 0.146584, -0.0794334, -0.146121, 0.986073, -29.4326, 2.6556, -27.8445 )
+
+[node name="MeshInstance" type="MeshInstance" parent="walls/StaticBody3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 14 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="walls/StaticBody3"]
+shape = SubResource( 15 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.994815, 0.029783, 0.0972399, -0.101699, 0.291337, 0.951199, 0, -0.956157, 0.292856, 0, 12.5705, 0 )
 
 [node name="vehicle" parent="." instance=ExtResource( 1 )]
-transform = Transform( -0.99987, 0, -0.0161434, 0, 1, 0, 0.0161434, 0, -0.99987, -78.5173, 1.12879, 0 )
+transform = Transform( -0.99987, 0, -0.0161434, 0, 1, 0, 0.0161434, 0, -0.99987, -98.4584, 1.12879, 0 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( -0.989234, 0, 0.146342, 0, 1, 0, -0.146342, 0, -0.989234, -78.197, 3.629, -3.998 )
+transform = Transform( -0.989234, 0, 0.146342, 0, 1, 0, -0.146342, 0, -0.989234, -98.1381, 3.629, -3.998 )
 fov = 85.0
 far = 500.0
 script = ExtResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -68.1232, 0, 0 )
-mesh = SubResource( 8 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -88.0643, 0, 0 )
+mesh = SubResource( 10 )
 material/0 = null
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -84.7595, 0, 0 )
-mesh = SubResource( 8 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -104.701, 0, 0 )
+mesh = SubResource( 10 )
 material/0 = SubResource( 9 )
