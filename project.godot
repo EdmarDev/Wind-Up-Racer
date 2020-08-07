@@ -9,19 +9,56 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area",
+"class": "FinishLine",
+"language": "GDScript",
+"path": "res://src/tracks/FinishLine.gd"
+}, {
+"base": "Node",
+"class": "Game",
+"language": "GDScript",
+"path": "res://src/main/Game.gd"
+}, {
+"base": "TextureProgress",
+"class": "GearUI",
+"language": "GDScript",
+"path": "res://src/main/GearUI.gd"
+}, {
+"base": "Spatial",
+"class": "Track",
+"language": "GDScript",
+"path": "res://src/tracks/Track.gd"
+}, {
 "base": "KinematicBody",
 "class": "Vehicle",
 "language": "GDScript",
 "path": "res://src/vehicle/vehicle.gd"
+}, {
+"base": "MeshInstance",
+"class": "Winder",
+"language": "GDScript",
+"path": "res://src/vehicle/Winder.gd"
 } ]
 _global_script_class_icons={
-"Vehicle": ""
+"FinishLine": "",
+"Game": "",
+"GearUI": "",
+"Track": "",
+"Vehicle": "",
+"Winder": ""
 }
 
 [application]
 
 config/name="Brackeys Jam 2020.2"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1900
+window/size/height=1080
+window/size/test_width=1235
+window/size/test_height=702
 
 [editor_plugins]
 
@@ -52,5 +89,6 @@ jump={
 
 [rendering]
 
+quality/directional_shadow/size=8192
 quality/filters/msaa=3
 environment/default_environment="res://default_env.tres"

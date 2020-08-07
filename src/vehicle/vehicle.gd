@@ -1,6 +1,9 @@
 class_name Vehicle
 extends KinematicBody
 
+signal stopped
+signal fell
+
 var drifting := .25
 var _wheel_base := 1.9
 var _velocity: Vector3
@@ -19,27 +22,29 @@ var _jump_timer := 0.0
 var _jump_leniency := .15
 var _floor_normal := Vector3.UP
 var _look_dir := Vector3.ZERO
+var _fall_height_limit := -5.0
 
 var _current_energy := 0.0
 var _max_energy := 20.0
 var _brake_energy_cost := 3.5
 var _moving := false
+var _started := false
 
 var _acceleration_boost := 0.0
 var _boost_duration := 0.0
 
+onready var _winder := $Car/Winder as Winder
 
 func _ready() -> void:
 	_heading_direction = -global_transform.basis.z
 	_look_dir = _heading_direction
-	yield(get_tree().create_timer(1.0), "timeout")
-	_start_moving()
 
 
 func _process(delta: float) -> void:
 	_update_energy(delta)
 	_update_boost(delta)
 	_update_jump(delta)
+	_check_fall()
 
 
 func _physics_process(delta: float) -> void:
@@ -68,7 +73,7 @@ func _physics_process(delta: float) -> void:
 		f *= delta
 		if _velocity.length() < 3:
 			f *= 3
-		$friction.text = str((_velocity * f).length() * 1/delta)
+		
 		_velocity -= _velocity * f
 		_velocity -= _velocity * _velocity.length() * _drag * delta
 	else:
@@ -83,6 +88,10 @@ func _physics_process(delta: float) -> void:
 		_velocity.y -= _gravity * delta
 	
 	apply_movement(delta)
+
+
+func get_velocity() -> Vector3:
+	return _velocity
 
 
 func get_final_acceleration() -> float:
@@ -116,15 +125,6 @@ func align_to_floor():
 
 
 func apply_movement(delta: float):
-#	_velocity = move_and_slide(_velocity, Vector3.UP)
-#	for i in get_slide_count():
-#		var col := get_slide_collision(i)
-#		var angle := rad2deg(col.normal.angle_to(Vector3.UP))
-#		if angle >= 45:
-#			_velocity += col.normal * 10
-#			_reset_persistent_boost()
-#			break
-
 	_is_on_floor = false
 	var delta_vel := _velocity * delta
 	var col := move_and_collide(delta_vel)
@@ -151,30 +151,44 @@ func apply_movement(delta: float):
 			_current_energy -= 3.0
 		col = move_and_collide(delta_vel)
 	
-	$speed.text = str(_velocity.length())
 	if !_moving and _velocity.length() <= .5:
 		_velocity = Vector3.ZERO
 
 
-func _start_moving():
+func start_moving():
+	_started = true
 	_moving = true
-	_current_energy = _max_energy
+	_winder.unwind()
+	_velocity = _heading_direction * 30
 	add_boost(100, .25)
 
 
 func _update_energy(delta: float):
+	if !_started:
+		return
+	
 	_current_energy = max(0, _current_energy - delta)
 	if _current_energy == 0.0:
 		_moving = false
+		_winder.stop()
 		if _velocity.length() < 0.1:
-			print("GameOver")
-	
-	$drag.text = str(_current_energy)
+			emit_signal("stopped")
+			set_physics_process(false)
+
+
+func get_current_energy() -> float:
+	return _current_energy
+
+
+func get_max_energy() -> float:
+	return _max_energy
 
 
 func recover_energy(amount: float):
 	_current_energy = min(_current_energy + amount, _max_energy)
-	_moving = true
+	if _started:
+		_moving = true
+	_winder.spin(.3)
 
 
 func _update_boost(delta: float):
@@ -199,3 +213,9 @@ func _update_jump(delta: float):
 	else:
 		_jump_timer -= delta
 	_can_jump = _jump_timer > 0.0
+
+
+func _check_fall():
+	if global_transform.origin.y <= _fall_height_limit:
+		emit_signal("fell")
+		_moving = false

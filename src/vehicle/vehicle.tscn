@@ -1,17 +1,18 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/vehicle/vehicle.gd" type="Script" id=1]
 [ext_resource path="res://assets/models/car.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://assets/models/car_winder.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://src/vehicle/Winder.gd" type="Script" id=4]
 
 [sub_resource type="SphereShape" id=1]
 radius = 0.6
 
-[node name="vehicle" type="KinematicBody"]
+[node name="Vehicle" type="KinematicBody"]
 script = ExtResource( 1 )
 
 [node name="Car" type="MeshInstance" parent="."]
-transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, 0, -0.442257, 0 )
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, 0, -0.596302, 0 )
 mesh = ExtResource( 2 )
 material/0 = null
 
@@ -19,39 +20,9 @@ material/0 = null
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25592e-07, 1.19122, -0.692337 )
 mesh = ExtResource( 3 )
 material/0 = null
+script = ExtResource( 4 )
+
+[node name="Tween" type="Tween" parent="Car/Winder"]
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
-
-[node name="friction" type="Label" parent="."]
-margin_left = 47.3868
-margin_top = 25.6957
-margin_right = 95.3868
-margin_bottom = 39.6957
-custom_colors/font_color = Color( 1, 0, 0, 1 )
-text = "asdasd "
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="drag" type="Label" parent="."]
-margin_left = 47.0531
-margin_top = 49.7228
-margin_right = 106.053
-margin_bottom = 63.7228
-custom_colors/font_color = Color( 0.87451, 1, 0, 1 )
-text = "adasdasd"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="speed" type="Label" parent="."]
-margin_left = 47.7205
-margin_top = 68.0769
-margin_right = 106.721
-margin_bottom = 82.0769
-custom_colors/font_color = Color( 0, 1, 0.184314, 1 )
-text = "adasdasd"
-__meta__ = {
-"_edit_use_anchors_": false
-}
