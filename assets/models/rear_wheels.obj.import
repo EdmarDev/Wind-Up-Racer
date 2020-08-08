@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/rear_wheels.obj-66de9d6ae9cca3d4e9621a07f5ad154c.mesh"
+
+[deps]
+
+files=[ "res://.import/rear_wheels.obj-66de9d6ae9cca3d4e9621a07f5ad154c.mesh" ]
+
+source_file="res://assets/models/rear_wheels.obj"
+dest_files=[ "res://.import/rear_wheels.obj-66de9d6ae9cca3d4e9621a07f5ad154c.mesh", "res://.import/rear_wheels.obj-66de9d6ae9cca3d4e9621a07f5ad154c.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

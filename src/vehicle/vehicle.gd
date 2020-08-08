@@ -163,6 +163,10 @@ func start_moving():
 	add_boost(100, .25)
 
 
+func is_moving():
+	return _moving
+
+
 func _update_energy(delta: float):
 	if !_started:
 		return

@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/vehicle/vehicle.gd" type="Script" id=1]
 [ext_resource path="res://assets/models/car.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://assets/models/car_winder.obj" type="ArrayMesh" id=3]
 [ext_resource path="res://src/vehicle/Winder.gd" type="Script" id=4]
+[ext_resource path="res://assets/models/front_wheels.obj" type="ArrayMesh" id=5]
+[ext_resource path="res://assets/models/rear_wheels.obj" type="ArrayMesh" id=6]
+[ext_resource path="res://src/vehicle/Wheel.gd" type="Script" id=7]
 
 [sub_resource type="SphereShape" id=1]
 radius = 0.6
@@ -23,6 +26,18 @@ material/0 = null
 script = ExtResource( 4 )
 
 [node name="Tween" type="Tween" parent="Car/Winder"]
+
+[node name="FrontWheels" type="MeshInstance" parent="Car"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.69457e-07, 0.374015, 0.826958 )
+mesh = ExtResource( 5 )
+material/0 = null
+script = ExtResource( 7 )
+
+[node name="RearWheels" type="MeshInstance" parent="Car"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.26107e-07, 0.6911, -0.693917 )
+mesh = ExtResource( 6 )
+material/0 = null
+script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
