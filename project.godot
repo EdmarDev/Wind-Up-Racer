@@ -68,7 +68,7 @@ window/size/test_height=702
 
 [editor_plugins]
 
-enabled=PoolStringArray( "CSGExporter" )
+enabled=PoolStringArray(  )
 
 [input]
 

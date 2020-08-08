@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/track_wall.obj-0a9234e1e5760bb529e5341afc06dc74.mesh"
+
+[deps]
+
+files=[ "res://.import/track_wall.obj-0a9234e1e5760bb529e5341afc06dc74.mesh" ]
+
+source_file="res://assets/models/track_wall.obj"
+dest_files=[ "res://.import/track_wall.obj-0a9234e1e5760bb529e5341afc06dc74.mesh", "res://.import/track_wall.obj-0a9234e1e5760bb529e5341afc06dc74.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

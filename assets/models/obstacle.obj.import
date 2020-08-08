@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/obstacle.obj-6f8a9f1f972ec125cbfc4e477cba9a53.mesh"
+
+[deps]
+
+files=[ "res://.import/obstacle.obj-6f8a9f1f972ec125cbfc4e477cba9a53.mesh" ]
+
+source_file="res://assets/models/obstacle.obj"
+dest_files=[ "res://.import/obstacle.obj-6f8a9f1f972ec125cbfc4e477cba9a53.mesh", "res://.import/obstacle.obj-6f8a9f1f972ec125cbfc4e477cba9a53.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
