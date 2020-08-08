@@ -38,6 +38,7 @@ onready var _winder := $Car/Winder as Winder
 func _ready() -> void:
 	_heading_direction = -global_transform.basis.z
 	_look_dir = _heading_direction
+	set_physics_process(false)
 
 
 func _process(delta: float) -> void:
@@ -156,12 +157,17 @@ func apply_movement(delta: float):
 
 
 func start_moving():
+	set_physics_process(true)
 	_started = true
 	_moving = true
 	_winder.unwind()
 	_velocity = _heading_direction * 30
 	add_boost(100, .25)
 
+
+func stop_moving():
+	_moving = false
+	_current_energy = 0.0
 
 func is_moving():
 	return _moving

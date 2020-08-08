@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/arena.obj-58682714b1eeef724eb676a9b0b6ae78.mesh"
+
+[deps]
+
+files=[ "res://.import/arena.obj-58682714b1eeef724eb676a9b0b6ae78.mesh" ]
+
+source_file="res://assets/models/arena.obj"
+dest_files=[ "res://.import/arena.obj-58682714b1eeef724eb676a9b0b6ae78.mesh", "res://.import/arena.obj-58682714b1eeef724eb676a9b0b6ae78.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

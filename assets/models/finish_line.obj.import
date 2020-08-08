@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/finish_line.obj-836b7af5e3acd8ce0d23d8d193f29962.mesh"
+
+[deps]
+
+files=[ "res://.import/finish_line.obj-836b7af5e3acd8ce0d23d8d193f29962.mesh" ]
+
+source_file="res://assets/models/finish_line.obj"
+dest_files=[ "res://.import/finish_line.obj-836b7af5e3acd8ce0d23d8d193f29962.mesh", "res://.import/finish_line.obj-836b7af5e3acd8ce0d23d8d193f29962.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

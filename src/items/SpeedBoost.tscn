@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/items/SpeedBoost.gd" type="Script" id=1]
 [ext_resource path="res://assets/models/gear.obj" type="ArrayMesh" id=2]
@@ -7,7 +7,47 @@
 radius = 0.579363
 
 [sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.580392, 0.498039, 0.341176, 1 )
+albedo_color = Color( 1, 0.458824, 0.270588, 1 )
+emission_enabled = true
+emission = Color( 1, 0.458824, 0.270588, 1 )
+emission_energy = 0.2
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="Animation" id=3]
+resource_name = "float"
+length = 2.0
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("visual:translation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("visual:translation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0.3, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1, 2 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("visual:translation:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
 
 [node name="SpeedBoost" type="Area"]
 script = ExtResource( 1 )
@@ -22,3 +62,7 @@ shape = SubResource( 1 )
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.461718, 0 )
 mesh = ExtResource( 2 )
 material/0 = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "float"
+anims/float = SubResource( 3 )

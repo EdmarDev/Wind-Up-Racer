@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/vehicle/vehicle.gd" type="Script" id=1]
 [ext_resource path="res://assets/models/car.obj" type="ArrayMesh" id=2]
@@ -7,8 +7,24 @@
 [ext_resource path="res://assets/models/front_wheels.obj" type="ArrayMesh" id=5]
 [ext_resource path="res://assets/models/rear_wheels.obj" type="ArrayMesh" id=6]
 [ext_resource path="res://src/vehicle/Wheel.gd" type="Script" id=7]
+[ext_resource path="res://assets/textures/car_texture.png" type="Texture" id=8]
+[ext_resource path="res://assets/textures/winder_texture.png" type="Texture" id=9]
+[ext_resource path="res://assets/textures/front_wheels_texture.png" type="Texture" id=10]
+[ext_resource path="res://assets/textures/rear_wheels_texture.png" type="Texture" id=11]
 
-[sub_resource type="SphereShape" id=1]
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 8 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_texture = ExtResource( 9 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_texture = ExtResource( 10 )
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_texture = ExtResource( 11 )
+
+[sub_resource type="SphereShape" id=2]
 radius = 0.6
 
 [node name="Vehicle" type="KinematicBody"]
@@ -17,12 +33,12 @@ script = ExtResource( 1 )
 [node name="Car" type="MeshInstance" parent="."]
 transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, 0, -0.596302, 0 )
 mesh = ExtResource( 2 )
-material/0 = null
+material/0 = SubResource( 1 )
 
 [node name="Winder" type="MeshInstance" parent="Car"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25592e-07, 1.19122, -0.692337 )
 mesh = ExtResource( 3 )
-material/0 = null
+material/0 = SubResource( 3 )
 script = ExtResource( 4 )
 
 [node name="Tween" type="Tween" parent="Car/Winder"]
@@ -30,14 +46,14 @@ script = ExtResource( 4 )
 [node name="FrontWheels" type="MeshInstance" parent="Car"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.69457e-07, 0.374015, 0.826958 )
 mesh = ExtResource( 5 )
-material/0 = null
+material/0 = SubResource( 4 )
 script = ExtResource( 7 )
 
 [node name="RearWheels" type="MeshInstance" parent="Car"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.26107e-07, 0.6911, -0.693917 )
 mesh = ExtResource( 6 )
-material/0 = null
+material/0 = SubResource( 5 )
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )

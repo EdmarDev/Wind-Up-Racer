@@ -1,13 +1,53 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/items/SpeedBoost.gd" type="Script" id=1]
 [ext_resource path="res://assets/models/gear.obj" type="ArrayMesh" id=2]
 
-[sub_resource type="SpatialMaterial" id=1]
+[sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 1, 0.952941, 0.239216, 1 )
+emission_enabled = true
+emission = Color( 1, 0.952941, 0.239216, 1 )
+emission_energy = 0.2
+emission_operator = 0
+emission_on_uv2 = false
 
-[sub_resource type="SphereShape" id=2]
+[sub_resource type="SphereShape" id=5]
 radius = 1.2
+
+[sub_resource type="Animation" id=3]
+resource_name = "float"
+length = 2.0
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("visual:translation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("visual:translation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0.3, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1, 2 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("visual:translation:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
 
 [node name="BigBoost" type="Area"]
 script = ExtResource( 1 )
@@ -19,7 +59,11 @@ boost_duration = 1.5
 
 [node name="MeshInstance" type="MeshInstance" parent="visual"]
 mesh = ExtResource( 2 )
-material/0 = SubResource( 1 )
+material/0 = SubResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 2 )
+shape = SubResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "float"
+anims/float = SubResource( 3 )

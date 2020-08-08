@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/tracks/track.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/vehicle/vehicle.tscn" type="PackedScene" id=2]
@@ -13,10 +13,26 @@ size = 75
 outline_size = 2
 font_data = ExtResource( 7 )
 
+[sub_resource type="DynamicFont" id=2]
+size = 120
+outline_size = 2
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 50
+outline_size = 2
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 35
+outline_size = 2
+font_data = ExtResource( 7 )
+
 [node name="Game" type="Node"]
 script = ExtResource( 4 )
 
 [node name="Track" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.511581, -0.0303268, -0.0177917 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 transform = Transform( -0.998824, 0, -0.0484839, 0, 1, 0, 0.0484839, 0, -0.998824, -97.1443, 0.869417, 7.49565 )
@@ -63,6 +79,59 @@ custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
 text = "0/3"
 align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WinLabel" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -222.0
+margin_top = 223.446
+margin_right = 222.0
+margin_bottom = 363.446
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.917647, 0.882353, 0.482353, 1 )
+custom_colors/font_outline_modulate = Color( 0.682353, 0.52549, 0.266667, 1 )
+custom_colors/font_color_shadow = Color( 0.25098, 0.345098, 0.337255, 1 )
+text = "You Win!!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IntroLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -366.5
+margin_top = -140.0
+margin_right = 366.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.917647, 0.882353, 0.482353, 1 )
+custom_colors/font_outline_modulate = Color( 0.682353, 0.52549, 0.266667, 1 )
+custom_colors/font_color_shadow = Color( 0.25098, 0.345098, 0.337255, 1 )
+text = "Press <Spacebar> to start!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IntroLabel2" type="Label" parent="."]
+margin_left = 25.5987
+margin_top = 23.9211
+margin_right = 758.599
+margin_bottom = 244.921
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.941176, 0.921569, 0.678431, 1 )
+custom_colors/font_outline_modulate = Color( 0.682353, 0.52549, 0.266667, 1 )
+custom_colors/font_color_shadow = Color( 0.25098, 0.345098, 0.337255, 1 )
+text = "Controls:
+A/D, Left/Right -> Steer
+Shift -> Brake
+Spacebar -> Jump"
 __meta__ = {
 "_edit_use_anchors_": false
 }
